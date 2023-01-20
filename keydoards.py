@@ -19,3 +19,8 @@ admin_update = InlineKeyboardMarkup(row_width=2)
 ok = InlineKeyboardButton('Подтвердить',callback_data='ok')
 no = InlineKeyboardButton('Отбой', callback_data='no')
 admin_update.add(ok).add(no)
+
+out_money = ReplyKeyboardMarkup(resize_keyboard=True)
+send_out = KeyboardButton('Вывод')
+back = KeyboardButton('Главное меню')
+out_money.add(send_out).add(back)

@@ -12,11 +12,17 @@ class Database:
 
     def add_user(self, user_id):
         with self.connection:
-            result = self.cursor.execute('INSERT INTO users (id) VALUES (?)', (user_id,))
+            result = self.cursor.execute('INSERT INTO users (id, balance) VALUES (?,0)', (user_id,))
             return result
 
 
     def balance(self, user_id):
         with self.connection:
-            result = self.cursor.execute("SELECT * FROM users WHERE id = ? ", (user_id)).fetchall()
+            result = self.cursor.execute("SELECT balance FROM users WHERE id = ? ", (user_id,)).fetchall()
             return result
+
+    def balance_update(self,user_id):
+        with self.connection:
+            result = self.cursor.execute("SELECT balance FROM users WHERE id = ? ", (user_id,)).fetchall()
+            a = 150 + int(result[0][0])
+            self.cursor.execute("UPDATE users SET balance = ? WHERE id = ?", (a, user_id,))
