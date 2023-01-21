@@ -26,3 +26,14 @@ class Database:
             result = self.cursor.execute("SELECT balance FROM users WHERE id = ? ", (user_id,)).fetchall()
             a = 150 + int(result[0][0])
             self.cursor.execute("UPDATE users SET balance = ? WHERE id = ?", (a, user_id,))
+
+    def lenuser(self):
+        """Считам сколько людей заходило в бота"""
+        with self.connection:
+            result = self.cursor.execute("SELECT id FROM users;").fetchall()
+            return len(result)
+
+    def all_user(self):
+        with self.connection:
+            result = self.cursor.execute('SELECT * FROM users').fetchall()
+            return result
